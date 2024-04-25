@@ -1,0 +1,126 @@
+You will need a conversion constrctor if user is already registered:
+
+main and functions will be separate cpp file, and classes will be also the seprate file. 
+
+
+I am creating a social media like console application project. I will small comminity where people can share their textual posts
+and make a comment on them. 
+I will creat it as follows:
+     User can enter the applicaton in two ways:
+               login or register.
+               
+            
+
+
+inheritance;
+
+     there will be one verified user; who can delete from the community and add people to the community. 
+     other people cannot have this option
+
+        after loggin in, he can do following activities:
+        if admin(verified user)
+                   make a textual post.
+                   see the post of others.
+                   list my posts
+                   list my comments.
+                   list all the people in the community.
+                   add a person. // it basically invites other people to the community(this application). all the people who is in this 
+                                community are the friends to one another. 
+                   delete a person.
+                   make an admin.
+                   exit.
+
+       else
+           make a post
+           see the post of others
+           list my posts
+           list my comments.  
+           list all the people in the community.
+           
+           exit            
+
+
+I need two files. first: password and name + admin file
+                              it will store the password and name of the each user of the community, and if the user is admin or not. 
+
+                 second: other info file. 
+                              it will store all other information about the user: posts and comments.
+
+
+ classes User;  Admin
+         Post   
+         ??Comment;
+         Manager;                    
+
+
+         Use the polymorphism for the user and admin class. to store users in in array. 
+
+
+         consider using the static array which will store the every data with the user. 
+
+
+
+
+         problems
+
+         admin
+         menu and posts
+
+
+         void UserManager::loadFromfile(const std::string& filename)
+{
+    std::fstream myfile(filename, std::ios::in);
+    if (!myfile.is_open())
+    {
+        std::cerr << "Error opening the file" << std::endl;
+        return;
+    }
+
+    std::string line, key, value;
+    while (getline(myfile, line))
+    {
+        std::istringstream iss(line);
+        std::string fileName, fileusername, filejob;
+        int fileage = 0;
+        bool isAdmin = false;
+
+        while (getline(iss, key, ':'))
+        {
+            getline(iss, value);
+            if (!value.empty() && value[0] == ' ')
+            {
+                value = value.substr(1);
+            }
+
+            if (key.find("Name") != std::string::npos) {
+                fileName = value;
+            } else if (key.find("Age") != std::string::npos) {
+                try {
+                    fileage = std::stoi(value);
+                } catch (const std::invalid_argument& ia) {
+                    std::cerr << "Invalid argument: " << ia.what() << '\n';
+                } catch (const std::out_of_range& oor) {
+                    std::cerr << "Out of Range error: " << oor.what() << '\n';
+                }
+            } else if (key.find("Admin") != std::string::npos) {
+                isAdmin = (value == "1");
+            } else if (key.find("Username") != std::string::npos) {
+                fileusername = value;
+            } else if (key.find("Occupation") != std::string::npos) {
+                filejob = value;
+            }
+        }
+
+        User* user = isAdmin ? static_cast<User*>(new Admin(fileusername, fileName, fileage, filejob))
+                             : new User(fileusername, fileName, fileage, filejob);
+        addUser(user);
+    }
+
+    myfile.close();
+}
+
+
+things that i need consider:
+
+making usermanger class static and all the other classes are the friend of this class
+is it ruining the OOP principles?

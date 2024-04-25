@@ -1,0 +1,19 @@
+User: user1
+PostID: 1
+Content: Here's the first post by user1.
+--Comments:
+----CommentID: 1
+----Content: Nice post!
+
+PostID: 2
+Content: Another post by user1.
+--Comments:
+----CommentID: 2
+----Content: Thanks for sharing.
+
+User: user2
+PostID: 3
+Content: user2's first post.
+--Comments:
+----CommentID: 3
+----Content: Interesting post.

@@ -1,0 +1,29 @@
+ User 1
+--Admin: 1
+--Name: Maksatbek uulu Azim
+--Username: AZM
+--Age: 20
+--Occupation: Programmer
+
+User 2
+--Admin:0
+--Name:Azamat
+--Username: Azam
+--Age:20
+--Occupation: Philosoph
+
+
+
+User 3
+--Admin:0
+--Name:Jake
+--Username:Wayne
+--Age:0
+--Occupation-
+
+User 4
+--Admin:0
+--Name:aktan
+--Username:aktan
+--Age:0
+--Occupation-
