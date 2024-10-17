@@ -124,3 +124,73 @@ things that i need consider:
 
 making usermanger class static and all the other classes are the friend of this class
 is it ruining the OOP principles?
+
+
+
+
+
+
+
+void User::uploadData(int usernum)// if 1 then user can change it himself
+{
+   
+        std::fstream myfile;
+        myfile.open("userdata.txt", std::ios::app);
+        if(!myfile.is_open())
+        {
+            std::cout<<"Couln't upload to the file"<<std::endl;
+            return;
+        }
+
+        myfile<<'\n'<<"User "<<usernum+1<<'\n';
+        myfile<<"--Admin:"<<0<<'\n';
+        myfile<<"--Name:"<<name<<'\n';
+        myfile<<"--Username:"<<username<<'\n';
+        myfile<<"--Age:"<<0<<'\n';
+        myfile<<"--Occupation"<<'-'<<'\n';
+
+        myfile.close();
+    
+}
+
+void UserManager::UpdataUsersfile(const std::string &filename)const
+{
+    std::fstream myfile;
+
+    myfile.open(filename, std::ios::out);
+    if(!myfile.is_open())
+    {
+       std::cout<<"Couln't open a file"<<std::endl;
+       return;
+    }
+    
+    myfile<<std::left<<std::setw(17)<<"Users"<<"Password"<<std::endl;
+
+    for(int i=0; i<usersNum; i++)
+    {
+      myfile << std::left << std::setw(17) <<udata[i]->username <<udata[i]->password << std::endl;
+
+    }
+    myfile.close();   
+
+}
+
+   myfile.open("users.txt", std::ios::app);
+    if(!myfile.is_open())
+    {
+       std::cout<<"Couldn't open a file"<<std::endl;
+       return false;
+    }
+
+   
+    myfile << std::left << std::setw(17) <<username <<password << std::endl;
+    myfile.close(); 
+
+
+
+
+     myfile<<"postend"<<std::endl;  // problem with post.txt
+
+
+     set data call the all the update files.
+   

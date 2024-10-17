@@ -1,19 +1,18 @@
-User: user1
-PostID: 1
-Content: Here's the first post by user1.
---Comments:
-----CommentID: 1
-----Content: Nice post!
+Username: AZM
+-Post: 1
+-Content: hey I am great to be here.
+---Comments: 
+-----comment 1: Super!!
+-----comment 2: perfect!!
+-----comment 3: Goog to see you
+postend
 
-PostID: 2
-Content: Another post by user1.
---Comments:
-----CommentID: 2
-----Content: Thanks for sharing.
+-Post: 2
+-Content: I am Batman!
+---Comments: 
+-----comment 1: Great
+-----comment 2: I am the king
+postend
 
-User: user2
-PostID: 3
-Content: user2's first post.
---Comments:
-----CommentID: 3
-----Content: Interesting post.
+
+

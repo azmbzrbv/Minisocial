@@ -3,104 +3,156 @@
 
 int main(){
   bool running=true;
-  UserManager manager;
+  UserManager manager;// manager object is created for managing the general application
   User *user=new User(); 
   std::cout<<"*****Welcome to Minisocial****"<<std::endl;
-  manager.loadFromfile("userdata.txt");
 
+  try
+  {
+    manager.loadFromfile("userdata.txt");// loading all necessary data from the database
+  }
+  catch(const std::exception &e)
+  {
+    std::cerr <<"Exception has occured! "<< e.what() << '\n';
+  }
+  
+ 
  while(running){
-  char choice;
+  int choice;
   std::cout<<"1. Register"<<std::endl;
   std::cout<<"2. Log in"<< std::endl;
   std::cout<<"3. Exit!"<<std::endl;
   std::cout<<"Enter the corresponding number!"<<std::endl;
   std::cin>>choice;
-  if(choice>'3' || choice<'1'){
+  if(std::cin.fail())// check if non-integer value is typed. std::cin fails when data type doesn't match expected type
+  {
+    std::cin.clear();// clears the error flags on cin so it can work again
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Removes bad input from the stream
+    std::cout<<"Invalid command, please type again!"<<std::endl;
+  }
+
+ else if(choice>3 || choice<1){
      std::cout<<"Invalid option, please type again!"<<std::endl;
      std::cin>>choice;
   }
   
-if(choice=='1'){
+else if(choice==1){
   {
+    try{
       if(user->registerUser()){
-        user->setData(0, manager.getUsernum());/// it wasn't implemented fully. consider making the manager static
-        manager.addUser(user);
+        manager.addUser(user); 
+        manager.UpdatePostData("userpost.txt");
+        manager.UpdateUserData("userdata.txt");
+        manager.UpdataUsersfile("users.txt");
         std::cout<<"Regisration is successfull!"<<std::endl;
         running=false;
       }
         
       else
         std::cout<<"Something went wrong! Please, try again!"<<std::endl;   
+    }
+    catch(const std::exception &e)
+    {
+      std::cerr<<"Exception has occured! "<<e.what()<<std::endl;
+    }
   }  
 
 }
-else if(choice=='2'){
-   
-    if(user->login())
-    {
-      user=manager.CheckIfAdmin(user); //check if admin by creating the method in manager!
-      
-      std::cout<<"You have logged in successfully!"<<std::endl;
-      running=false;
-    }
-    else{
-      std::cout<<"Plsease, try again!"<<std::endl;
-    }
+else if(choice==2){
+   try{
+        if(user->login())
+        {
+          User *assignedUser=manager.AssignData(user); 
+
+          if(assignedUser!=user)
+          {
+            delete user;  // to avoid memery leakage
+            user= assignedUser;
+          }
+          
+          std::cout<<"You have logged in successfully!"<<std::endl;
+          running=false;
+       }else{
+          std::cout<<"Please, try again!"<<std::endl;
+        }
+     }
+     catch(const std::exception &e)
+     {
+      std::cerr<<"Exception occured during login: "<<e.what()<<std::endl;
+     }
 }
 
-else if(choice=='3')
+else if(choice==3)
   return 0;
  }
 
- char choose='99';
+ int choose=99;
  user->displayMenu();
 
-while(choose!='7')
+while(choose!=12)
 {
   
 
   
-  std::cout<<"Please type a corresponding number!"<<std::endl;
+  std::cout<<"Please type a corresponding number from MENU!"<<std::endl;
   std::cin>>choose;
+
+  if(std::cin.fail())// check if non-integer value is typed. std::cin fails when data type doesn't match expected type
+  {
+    std::cin.clear();// clears the error flags on cin so it can work again
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Removes bad input from the stream
+    std::cout<<"Invalid command"<<std::endl;
+    continue;
+  }
 
   switch (choose)
   {
-  case '1': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 1: user->addPost(); 
+          try
+          {
+            manager.UpdatePostData("userpost.txt");
+          }
+          catch(const std::exception &e)
+          {
+            std::cerr <<"Exception has occured! "<< e.what() << '\n';
+          }
+      break;//done 
 
-  case '2': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 2: manager.displayOthersposts(); break;// done 
 
-  case '3': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 3: user->displayallposts(); break;//done
 
-  case '4': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 4: user->deletePost();
+          try
+          {
+            manager.UpdatePostData("userpost.txt");
+          }
+          catch(const std::exception& e)
+          {
+             std::cerr <<"Exception has occured! "<< e.what() << '\n';
+          }
+    break;
 
-  case '5': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 5: manager.listUsers(); break;
 
-  case '6': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 6: manager.SearchUser(); break;
 
-  case '8': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 7: user->Setdata(manager);  break;
 
-  case '9': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 8: user->displayMenu(); break;
 
-  case '10': std::cout<<"This function is not ready yet!"<<std::endl; break;
+  case 9: user->MakeAdmin(manager); break;
 
-  default: break;
+  case 10: user->deleteUser(manager); break;
+
+  case 11: user->deleteOthersPost(manager); break;
+  
+  case 12: std::cout<<"Thank you for using Minisocial!"<<std::endl; break;
+
+  default: std::cout<<"Invalid command!"<<std::endl; break;
   }
 
 }
-
-/*Further implementations:
-loadposts
-userpost.txt*/
-
-// questions to ask:
-//what will happen if i make whole class static?
-//
-
-
-
-     
-  
-
 
 
  return 0;

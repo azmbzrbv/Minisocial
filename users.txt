@@ -1,5 +1,2 @@
-Users            Passwords  
-AZM              4567  
-Azam             56565656      
-Wayne            adkjflsl
-aktan            aldkfjlkd
+Users            Password
+AZM              Azim4545
