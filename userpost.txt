@@ -13,6 +13,3 @@ postend
 -----comment 1: Great
 -----comment 2: I am the king
 postend
-
-
-
