@@ -9,14 +9,19 @@ The **Social-Media Management** is a console-based application designed to **sim
 A **file management system** is used to save and control information throughout the program, ensuring data persistence and easy access.
 
 **How to run**
-Prerequisites
+--
+**Prerequisites**
+
+
 CMake >= 3.10
 
 C++ compiler (e.g. MSVC, g++, clang)
 
-Build Steps
-# Clone the repo
-git clone https://github.com/yourusername/minisocial.git
+**Build Steps**
+
+
+```# Clone the repo
+git clone https://github.com/azmbzrbv/Minisocial.git
 cd minisocial
 
 # Create build directory
@@ -28,13 +33,14 @@ cmake ..
 
 # Build the project
 cmake --build .
+```
+
 ▶️ Run the App
-On Windows:
-./Debug/Minisocial.exe
+
+On Windows: ./Debug/Minisocial.exe
 
 
-On Linux/macOS:
-./Minisocial
+On Linux/macOS: ./Minisocial
 
 For more detailed information, please refer to the [Documentation.pdf](https://github.com/user-attachments/files/17423113/Documentaion.pdf).
 
