@@ -42,5 +42,7 @@ On Windows: ./Debug/Minisocial.exe
 
 On Linux/macOS: ./Minisocial
 
+The program starts from `src/MediaMain.cpp` where the `main()` function is defined.
+
 For more detailed information, please refer to the [Documentation.pdf](https://github.com/user-attachments/files/17423113/Documentaion.pdf).
 
