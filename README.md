@@ -35,7 +35,7 @@ cmake ..
 cmake --build .
 ```
 
-▶️ Run the App
+**Run the App**
 
 On Windows: ./Debug/Minisocial.exe
 
